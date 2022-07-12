@@ -1,36 +1,32 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
+void myprintf(int* ary , int n);
 
-int main()
+int main(void)
 {
-	char fname[] = "chsar.txt";
-	FILE* f;
-
-	if (fopen_s(&f, fname, "w") != 0)
+	int* reary, * cary;
+	if ((cary = (int*)calloc(3, sizeof(int))) == NULL)
 	{
-		printf("nonono\n");
-		exit(1);
+		printf("메모리 할당이 문제가 있습니다.\n");
+		exit(EXIT_FAILURE);
 	}
-	puts("");
+	printf("%p\n", cary);
+	cary[0] = 10;
 
-	int ch;
-	while ((ch = _getche()) != 'x')
-		fputc(ch, f);
-	fclose(f);
-	puts("");
-
-	if (fopen_s(&f, fname, "r") != 0)
+	if ((reary = (int*)realloc(cary, 4 * sizeof(int))) == NULL)
 	{
-		printf("nono\n");
-		exit(1);
+		printf("에러");
+		exit(EXIT_FAILURE);
 	}
+	printf("%p\n", reary);
 
-	while ((ch = fgetc(f)) != EOF)
-		_putch(ch);
-	fclose(f);
-	puts("");
-
+	myprintf(reary, 4);
+	free(reary);
 	return 0;
+}
+
+void myprintf(int* ary, int n)
+{
+	for (int i = 0; i < n; i++)
+		printf("ary[%d] %d\n", i, *(ary + i));
 }
