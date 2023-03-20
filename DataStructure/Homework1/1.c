@@ -12,7 +12,7 @@ int main(void)
 
 	while (feof(fr) == 0)
 	{
-		fscanf(fr, "%d %s %lf %lf", &idx, name, &score1, &score2);
+		fscanf(fr, "%d %s %lf %lf", &idx, &name, &score1, &score2);
 		fprintf(fw, "%d %s %g %g %g\n", idx, name, score1, score2, (score1 + score2));
 	}
 	fclose(fr);
