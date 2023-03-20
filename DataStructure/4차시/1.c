@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -45,7 +45,7 @@ void sol(int N, int** Matrix)
 
 	FILE* fw = fopen("output.txt", "w");
 	fprintf(fw, "%d\n", transposed[0].value);
-	
+
 	for (int ii = 1; ii < transposed[0].value + 1; ii++)
 	{
 		fprintf(fw, "%d %d %d\n", transposed[ii].row, transposed[ii].col, transposed[ii].value);
@@ -60,7 +60,7 @@ term* makeSparse(int N, int** Matrix)
 	term* Sparse = (term*)malloc(sizeof(term));
 	int NumElements = 0;
 	int value;
-	for (int ii = 0;ii < N;ii++)
+	for (int ii = 0; ii < N; ii++)
 	{
 		for (int jj = 0; jj < N; jj++)
 		{
@@ -68,7 +68,7 @@ term* makeSparse(int N, int** Matrix)
 			if (value != 0)
 			{
 				NumElements++;
-				
+
 				Sparse = realloc(Sparse, sizeof(term) * (NumElements + 1));
 				Sparse[NumElements].row = ii;
 				Sparse[NumElements].col = jj;
@@ -90,7 +90,7 @@ term* FastTransposing(term* Sparse)
 	int row;
 	N = Sparse[0].row;
 	NumElements = Sparse[0].value;
-	// row Terms¸¸µé±â
+	// row TermsÂ¸Â¸ÂµÃ©Â±Ã¢
 	int* rowTerms = (int*)malloc(sizeof(int) * N);
 	for (int ii = 0; ii <= N; ii++)
 	{
@@ -103,25 +103,25 @@ term* FastTransposing(term* Sparse)
 		rowTerms[row]++;
 	}
 
-	//startingPos ¸¸µé±â
+	//startingPos Â¸Â¸ÂµÃ©Â±Ã¢
 	int start = 1;
 	int* startingPos = (int*)malloc(sizeof(int) * N);
 
 
-	for (int ii = 0; ii < N;ii++)
+	for (int ii = 0; ii < N; ii++)
 	{
 		startingPos[ii] = start;
 		start += rowTerms[ii];
 		//printf("%d\n", start);
 	}
 
-	// ÁøÂ¥ transpose
+	// ÃÃ¸Ã‚Â¥ transpose
 	term* transposed = (term*)malloc(sizeof(term) * (NumElements + 1));
 	transposed[0].row = N;
 	transposed[0].col = N;
 	transposed[0].value = NumElements;
 
-	for (int ii = 1;ii < NumElements + 1; ii++)
+	for (int ii = 1; ii < NumElements + 1; ii++)
 	{
 		int col = Sparse[ii].col;
 		int idx = startingPos[col];
