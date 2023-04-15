@@ -3,24 +3,24 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[ ])
 {
 	char ch;
 	char line[100];
 	FILE* fr = fopen(argv[1], "r");
 	FILE* fw = fopen("output.txt", "w");
-	// loop µ¹¸®¸é µÇ°Ú³×
+	// loop ëŒë¦¬ë©´ ë˜ê² ë„¤
 	while (feof(fr) == 0)
 	{
 		fgets(line, 100, fr);
 		for (int i = 0; i < strlen(line); i++)
 		{
 			ch = line[i];
-			//¼Ò¹®ÀÚ -> ´ë¹®ÀÚ
+			//ì†Œë¬¸ì -> ëŒ€ë¬¸ì
 			if (ch >= 'a' && ch <= 'z')
 				ch -= 32;
 
-			// ´ë¹®ÀÚ -> ¼Ò¹®ÀÚ
+			// ëŒ€ë¬¸ì -> ì†Œë¬¸ì
 			if (ch >= 'A' && ch <= 'Z')
 				ch += 32;
 
